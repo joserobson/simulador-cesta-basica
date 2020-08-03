@@ -16,12 +16,19 @@ const getItems = (count, offset = 0) =>
 const produtos = [
   { id: "1", content: "Feijão", ehCestaBasica: true, img:'feijao.png' },
   { id: "2", content: "Arroz", ehCestaBasica: true,img:'arroz.png' },
-  { id: "3", content: "Batata", ehCestaBasica: false,img:'feijao.png' },
-  { id: "4", content: "Bala", ehCestaBasica: false, img:'feijao.png' },
-  { id: "5", content: "Pinga", ehCestaBasica: false,img:'feijao.png' },
-  { id: "6", content: "Sal", ehCestaBasica: true, img:'feijao.png' },
-  { id: "7", content: "Oleo", ehCestaBasica: true, img:'feijao.png' },
-  { id: "8", content: "Bombom", ehCestaBasica: false, img:'feijao.png' },
+  { id: "3", content: "Sal", ehCestaBasica: true,img:'sal.png' },
+  { id: "4", content: "Açucar", ehCestaBasica: true, img:'acucar.png' },
+  { id: "5", content: "Macarrão", ehCestaBasica: true,img:'macarrao.png' },
+  { id: "6", content: "Massa de Tomate", ehCestaBasica: true, img:'massaTomate.png' },
+  { id: "7", content: "Óleo", ehCestaBasica: true, img:'oleo.png' },
+  { id: "8", content: "Café", ehCestaBasica: true, img:'cafe.png' },
+  { id: "9", content: "Fubá", ehCestaBasica: true, img:'fuba.png' },
+  { id: "10", content: "Bolacha", ehCestaBasica: true, img:'bolacha.png' },
+  { id: "11", content: "Bombom", ehCestaBasica: false, img:'bombom.png' },
+  { id: "12", content: "Refrigerante", ehCestaBasica: false, img:'refrigerante.png' },
+  { id: "13", content: "Shampoo", ehCestaBasica: false, img:'shampoo.png' },
+  { id: "14", content: "Amaciante", ehCestaBasica: false, img:'amaciante.png' },
+  { id: "15", content: "Danone", ehCestaBasica: false, img:'danone.png' }
 ];
 
 // a little function to help us with reordering the result
@@ -50,18 +57,20 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const getListStyle = (isDraggingOver, float) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: "58%",
+  width: "60%",
   float: float,
-  height: "450px",
+  height: "480px",
 });
 
-const getCarrinhoListStyle = (isDraggingOver, float) => ({
+const getCarrinhoListStyle = (isDraggingOver, float, img) => ({
   //background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
   width: "38%",
   float: float,
   height: "430px",
-  backgroundImage:'url(../imgs/carrinhoCompras.png)'
+  //backgroundImage:'url(../imgs/carrinhoCompras.png)',
+  backgroundImage:`url(../imgs/${img})`,
+  marginTop: "30px"
 });
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -106,6 +115,7 @@ class App extends Component {
   state = {
     items: produtos,
     selected: [],
+    backgroundImage: 'carrinhoCompras.png'
   };
 
   openPopupbox(mensagem) {
@@ -156,8 +166,7 @@ class App extends Component {
       if (!produto.ehCestaBasica) {      
         this.openPopupbox("O PRODUTO " + produto.content.toUpperCase() + " NÃO PERTENCE A CESTA BÁSICA!!!");
         return;
-      }
-
+      }      
 
       const result = move(
         this.getList(source.droppableId),
@@ -166,9 +175,13 @@ class App extends Component {
         destination
       );
 
+      debugger;
+      let img = `carrinhoCompras${this.getList(destination.droppableId).length + 1}Produto.png`;
+
       this.setState({
         items: result.droppable,
         selected: result.droppable2,
+        backgroundImage: img
       });
     }
   };
@@ -198,15 +211,20 @@ class App extends Component {
           <div style={{ textAlign: "center" }}>
             <h2>Compre Somente Produtos da Cesta Básica</h2>
           </div>
+
+          <div style={{ textAlign: "center", width:'60%', float:"left" }}>
+              <h2>Produtos do Supermercado</h2>
+           </div>
+           <div style={{ textAlign: "center", width:'38%', float:"right" }}>
+              <h2>Meu Carrinho</h2>
+           </div>
+
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver, "left")}
-              >
-                <div style={{ textAlign: "center" }}>
-                  <h2>Produtos do Supermercado</h2>
-                </div>
+              >                
                 <table style={{ width: "100%" }}>
                   <tbody>
                     {linhas.map((itemLinha, indexLinha) => (
@@ -270,7 +288,7 @@ class App extends Component {
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
-                style={getCarrinhoListStyle(snapshot.isDraggingOver, "right")}
+                style={getCarrinhoListStyle(snapshot.isDraggingOver, "right",this.state.backgroundImage)}
               >
                 {/* <div style={{ textAlign: "center" }}>
                   <h2>Carrinho de Compras</h2>
@@ -288,7 +306,7 @@ class App extends Component {
                         )}
                       >
                         {/* <img src={`../imgs/${item.img}`}/> */}
-                        <h3>{item.content}</h3>
+                        {/* <h3>{item.content}</h3> */}
                       </div>
                     )}
                   </Draggable>
