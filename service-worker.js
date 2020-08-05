@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/simulador-cesta-basica/precache-manifest.308af62a1f208d05b3c3c96d619ae852.js"
+  "/simulador-cesta-basica/precache-manifest.4994d1545f3a013c7fc380c717c4faad.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/simulador-cesta-basica/static/css/main.61a7015a.chunk.css",
-    "main.js": "/simulador-cesta-basica/static/js/main.62ea7a9b.chunk.js",
-    "main.js.map": "/simulador-cesta-basica/static/js/main.62ea7a9b.chunk.js.map",
+    "main.js": "/simulador-cesta-basica/static/js/main.2b02bdbd.chunk.js",
+    "main.js.map": "/simulador-cesta-basica/static/js/main.2b02bdbd.chunk.js.map",
     "runtime-main.js": "/simulador-cesta-basica/static/js/runtime-main.f4058d54.js",
     "runtime-main.js.map": "/simulador-cesta-basica/static/js/runtime-main.f4058d54.js.map",
     "static/css/2.ccab356c.chunk.css": "/simulador-cesta-basica/static/css/2.ccab356c.chunk.css",
     "static/js/2.d97f3e1a.chunk.js": "/simulador-cesta-basica/static/js/2.d97f3e1a.chunk.js",
     "static/js/2.d97f3e1a.chunk.js.map": "/simulador-cesta-basica/static/js/2.d97f3e1a.chunk.js.map",
     "index.html": "/simulador-cesta-basica/index.html",
-    "precache-manifest.308af62a1f208d05b3c3c96d619ae852.js": "/simulador-cesta-basica/precache-manifest.308af62a1f208d05b3c3c96d619ae852.js",
+    "precache-manifest.4994d1545f3a013c7fc380c717c4faad.js": "/simulador-cesta-basica/precache-manifest.4994d1545f3a013c7fc380c717c4faad.js",
     "service-worker.js": "/simulador-cesta-basica/service-worker.js",
     "static/css/2.ccab356c.chunk.css.map": "/simulador-cesta-basica/static/css/2.ccab356c.chunk.css.map",
     "static/css/main.61a7015a.chunk.css.map": "/simulador-cesta-basica/static/css/main.61a7015a.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.ccab356c.chunk.css",
     "static/js/2.d97f3e1a.chunk.js",
     "static/css/main.61a7015a.chunk.css",
-    "static/js/main.62ea7a9b.chunk.js"
+    "static/js/main.2b02bdbd.chunk.js"
   ]
 }
