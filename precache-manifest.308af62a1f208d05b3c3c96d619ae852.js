@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "277605f192f1ae1ba59f7905e1441d95",
+    "revision": "168a06a4c1ccdb822f0ce82529a4cbb0",
     "url": "/simulador-cesta-basica/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/simulador-cesta-basica/static/css/2.ccab356c.chunk.css"
   },
   {
-    "revision": "2af14fce774b1d906675",
+    "revision": "778d6077feaa51144a32",
     "url": "/simulador-cesta-basica/static/css/main.61a7015a.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/simulador-cesta-basica/static/js/2.d97f3e1a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2af14fce774b1d906675",
-    "url": "/simulador-cesta-basica/static/js/main.f0606192.chunk.js"
+    "revision": "778d6077feaa51144a32",
+    "url": "/simulador-cesta-basica/static/js/main.62ea7a9b.chunk.js"
   },
   {
     "revision": "ea5e311ac5f02655f6b7",
