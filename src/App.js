@@ -334,7 +334,7 @@ class App extends Component {
         {this.state.iniciarJogo && !this.state.tempoEsgotado &&
         <div id="jogo">
           <div style={{ textAlign: "center", width: '60%', float:"left" }}>
-            <h2>Selecione e arraste os produtos da cesta básica para dentro do carrinho</h2>            
+            <h2>Selecione e arraste os produtos da cesta básica para dentro do carrinho.</h2>            
           </div>          
 
           <div style={{ textAlign: "center",width: '38%', float:"right" }}>
