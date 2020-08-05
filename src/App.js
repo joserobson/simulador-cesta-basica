@@ -127,7 +127,7 @@ const popupboxConfig = {
 };
 
 const tempoDeJogoSegundos = 60;
-const tempoDeJogoMinutos = 2;
+const tempoDeJogoMinutos = 1;
 
 class App extends Component {
 
