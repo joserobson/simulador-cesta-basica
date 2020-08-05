@@ -126,13 +126,21 @@ const popupboxConfig = {
   fadeInSpeed: 500,
 };
 
+const tempoDeJogo = 10;
+
 class App extends Component {
+
   state = {
     items: produtos,
     selected: [],
     backgroundImage: "carrinhoCompras.png",
     iniciarJogo: false,
+    totalDePontos: 0,
+    segundos:tempoDeJogo,
+    minutos:0,
+    tempoEsgotado:false
   };
+  
 
   openPopupbox(mensagem) {
     const content = (
@@ -184,8 +192,14 @@ class App extends Component {
             produto.content.toUpperCase() +
             " NÃO PERTENCE A CESTA BÁSICA!!!"
         );
+
+        this.setState({
+          totalDePontos: this.state.totalDePontos - 5
+        });
+
         return;
       }
+
 
       const result = move(
         this.getList(source.droppableId),
@@ -203,6 +217,7 @@ class App extends Component {
         items: result.droppable,
         selected: result.droppable2,
         backgroundImage: img,
+        totalDePontos: this.state.totalDePontos + 5
       });
     }
   };
@@ -214,7 +229,55 @@ class App extends Component {
     });
   }
 
-  render() {
+  reiniciarJogo =() =>{
+   
+    this.setState({
+      backgroundImage: "carrinhoCompras.png",
+      iniciarJogo: true,
+      totalDePontos: 0,
+      segundos:tempoDeJogo,
+      minutos:0,
+      tempoEsgotado:false,
+      items: produtos,
+      selected: []
+    });
+  }
+
+  componentDidMount(){
+
+
+    this._interval = setInterval(() => {
+                
+      if (this.state.segundos >= 0 && this.state.minutos >= 0 && this.state.iniciarJogo === true)
+      {
+        let segundos = this.state.segundos - 1;
+        let minutos = this.state.minutos;
+        if (segundos === 0 && minutos > 0)
+        {
+          minutos = minutos - 1;
+          segundos = 59;
+        }
+
+        if (segundos < 0 ){
+          this.setState({
+            segundos: 0,
+            minutos: 0,
+            tempoEsgotado:true
+          });
+
+        }else{
+          this.setState({
+            segundos: segundos,
+            minutos: minutos
+          });
+        }
+      }
+
+    }, 1000);
+  }
+
+  render() {    
+
     const numeroColunas = 5;
 
     let linhas = [];
@@ -235,7 +298,7 @@ class App extends Component {
       <div>
         <PopupboxContainer {...popupboxConfig} />
 
-        { !this.state.iniciarJogo && 
+        { !this.state.iniciarJogo && !this.state.tempoEsgotado &&
           <div id="prepararJogo" style={{textAlign:"center"}}>
             <h2>Clique no Botão "Jogar" Para Iniciar o Jogo</h2>
             <h2>Você tem 1 Minuto e 30 Segundos Para Selecionar Somente Produtos Da Cesta Básica</h2>
@@ -243,15 +306,23 @@ class App extends Component {
           </div>
         }
 
+        {this.state.tempoEsgotado &&
+          <div id="resultadoJogo" style={{textAlign:"center"}}>
+          <h2>FIM DE JOGO</h2>          
+          <h2>VOCÊ FEZ {this.state.totalDePontos} PONTOS</h2>          
+          <button onClick={this.reiniciarJogo}>Jogar Novamente</button>
+        </div>        
+        }
 
-        {this.state.iniciarJogo &&
+
+        {this.state.iniciarJogo && !this.state.tempoEsgotado &&
         <div id="jogo">
           <div style={{ textAlign: "center", width: '60%', float:"left" }}>
             <h2>Selecione e Arraste os Produtos Para Dentro Do Carrinho</h2>            
           </div>          
 
           <div style={{ textAlign: "center",width: '38%', float:"right" }}>
-            <h2>Pontos = </h2>            
+        <h2>Total De Pontos: {this.state.totalDePontos} -  Tempo: 0{this.state.minutos}:{this.state.segundos} </h2>            
           </div>
 
           <DragDropContext onDragEnd={this.onDragEnd}>
