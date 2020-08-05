@@ -17,7 +17,7 @@ const produtos = [
   { id: "1", content: "Feijão", ehCestaBasica: true, img: "feijao.png" },
   { id: "2", content: "Arroz", ehCestaBasica: true, img: "arroz.png" },
   { id: "3", content: "Sal", ehCestaBasica: true, img: "sal.png" },
-  { id: "4", content: "Açucar", ehCestaBasica: true, img: "acucar.png" },
+  { id: "4", content: "Açúcar", ehCestaBasica: true, img: "acucar.png" },
   { id: "5", content: "Macarrão", ehCestaBasica: true, img: "macarrao.png" },
   {
     id: "6",
@@ -120,13 +120,14 @@ const getItemCarrinhoStyle = (isDragging, draggableStyle) => ({
 const popupboxConfig = {
   titleBar: {
     enable: true,
-    text: "AVISO",
+    text: "ATENÇÃO",
   },
   fadeIn: true,
   fadeInSpeed: 500,
 };
 
-const tempoDeJogo = 30;
+const tempoDeJogoSegundos = 60;
+const tempoDeJogoMinutos = 2;
 
 class App extends Component {
 
@@ -136,8 +137,8 @@ class App extends Component {
     backgroundImage: "carrinhoCompras.png",
     iniciarJogo: false,
     totalDePontos: 0,
-    segundos:tempoDeJogo,
-    minutos:0,
+    segundos:tempoDeJogoSegundos,
+    minutos:tempoDeJogoMinutos,
     tempoEsgotado:false
   };
   
@@ -190,7 +191,7 @@ class App extends Component {
         this.openPopupbox(
           "O PRODUTO " +
             produto.content.toUpperCase() +
-            " NÃO PERTENCE A CESTA BÁSICA!!!"
+            " NÃO PERTENCE À CESTA BÁSICA!"
         );
 
         this.setState({
@@ -238,8 +239,8 @@ class App extends Component {
       backgroundImage: "carrinhoCompras.png",
       iniciarJogo: true,
       totalDePontos: 0,
-      segundos:tempoDeJogo,
-      minutos:0,
+      segundos:tempoDeJogoSegundos,
+      minutos:tempoDeJogoMinutos,
       tempoEsgotado:false,
       items: produtos,
       selected: []
@@ -303,8 +304,9 @@ class App extends Component {
 
         { !this.state.iniciarJogo && !this.state.tempoEsgotado &&
           <div id="prepararJogo" style={{textAlign:"center", paddingTop:'10px'}}>
-            <h2>Clique no Botão "Jogar" Para Iniciar o Jogo</h2>
-            <h2>Você tem 1 Minuto e 30 Segundos Para Selecionar Somente Produtos Da Cesta Básica</h2>
+            <h1>PREPARADO(A) PARA AS COMPRAS?</h1>            
+            <h2>VOCÊ TEM 2 MINUTOS PRA SELECIONAR SOMENTE OS PRODUTOS DA CESTA BÁSICA.</h2>            
+            <h1>BOAS COMPRAS!</h1>
             <div style={{float:"left", width:"50%"}}>
               <img src="../imgs/fundoPaginaInicial.png"></img>
             </div>
@@ -332,7 +334,7 @@ class App extends Component {
         {this.state.iniciarJogo && !this.state.tempoEsgotado &&
         <div id="jogo">
           <div style={{ textAlign: "center", width: '60%', float:"left" }}>
-            <h2>Selecione e Arraste os Produtos Para Dentro Do Carrinho</h2>            
+            <h2>Selecione e arraste os produtos da cesta básica para dentro do carrinho.</h2>            
           </div>          
 
           <div style={{ textAlign: "center",width: '38%', float:"right" }}>
