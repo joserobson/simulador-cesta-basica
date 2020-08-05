@@ -126,7 +126,7 @@ const popupboxConfig = {
   fadeInSpeed: 500,
 };
 
-const tempoDeJogo = 10;
+const tempoDeJogo = 30;
 
 class App extends Component {
 
@@ -208,16 +208,19 @@ class App extends Component {
         destination
       );
 
-      debugger;
-      let img = `carrinhoCompras${
-        this.getList(destination.droppableId).length + 1
-      }Produto.png`;
+      let img = `carrinhoCompras${this.getList(destination.droppableId).length + 1}Produto.png`;
+
+      let tempoEsgotado = false;
+      if (result.droppable2.length === 10){
+        tempoEsgotado = true;
+      }  
 
       this.setState({
         items: result.droppable,
         selected: result.droppable2,
         backgroundImage: img,
-        totalDePontos: this.state.totalDePontos + 5
+        totalDePontos: this.state.totalDePontos + 5,
+        tempoEsgotado: tempoEsgotado
       });
     }
   };
@@ -299,18 +302,29 @@ class App extends Component {
         <PopupboxContainer {...popupboxConfig} />
 
         { !this.state.iniciarJogo && !this.state.tempoEsgotado &&
-          <div id="prepararJogo" style={{textAlign:"center"}}>
+          <div id="prepararJogo" style={{textAlign:"center", paddingTop:'10px'}}>
             <h2>Clique no Botão "Jogar" Para Iniciar o Jogo</h2>
             <h2>Você tem 1 Minuto e 30 Segundos Para Selecionar Somente Produtos Da Cesta Básica</h2>
-            <button onClick={this.jogar}>Jogar</button>
+            <div style={{float:"left", width:"50%"}}>
+              <img src="../imgs/fundoPaginaInicial.png"></img>
+            </div>
+            <div style={{float:"right", width:"50%", paddingTop:'100px'}}>
+                <button className="btnJogar" onClick={this.jogar}>Jogar</button>  
+            </div>
+            
           </div>
         }
 
         {this.state.tempoEsgotado &&
           <div id="resultadoJogo" style={{textAlign:"center"}}>
-          <h2>FIM DE JOGO</h2>          
-          <h2>VOCÊ FEZ {this.state.totalDePontos} PONTOS</h2>          
-          <button onClick={this.reiniciarJogo}>Jogar Novamente</button>
+          <h2>FIM DE JOGO</h2> 
+          <div style={{float:"left", width:"50%"}}>
+              <img src="../imgs/fundoPaginaInicial.png"></img>
+          </div>
+          <div style={{float:"right", width:"50%", paddingTop:"100px"}}>         
+            <h2>VOCÊ FEZ {this.state.totalDePontos} PONTOS</h2>          
+          </div>
+          <button className="btnJogar" onClick={this.reiniciarJogo}>Jogar Novamente</button>
         </div>        
         }
 
@@ -322,7 +336,7 @@ class App extends Component {
           </div>          
 
           <div style={{ textAlign: "center",width: '38%', float:"right" }}>
-        <h2>Total De Pontos: {this.state.totalDePontos} -  Tempo: 0{this.state.minutos}:{this.state.segundos} </h2>            
+          <h2> Tempo: 0{this.state.minutos}:{ this.state.segundos < 10 ? '0'+ this.state.segundos: this.state.segundos} </h2>            
           </div>
 
           <DragDropContext onDragEnd={this.onDragEnd}>
